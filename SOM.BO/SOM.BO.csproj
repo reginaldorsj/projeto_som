@@ -1,0 +1,94 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0CE3BBB2-3066-4E4C-8431-9374F557C766}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SOM.BO</RootNamespace>
+    <AssemblyName>SOM.BO</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Practices.Unity">
+      <HintPath>..\..\Microsoft Unity Application Block\Bin\Microsoft.Practices.Unity.dll</HintPath>
+    </Reference>
+    <Reference Include="Regisoft, Version=4.5.7326.26922, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Regisoft\Regisoft\bin\Regisoft.dll</HintPath>
+    </Reference>
+    <Reference Include="Regisoft.Camadas.Interface">
+      <HintPath>..\..\Regisoft\Regisoft.Camadas.Interface\bin\Regisoft.Camadas.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AtendimentoBO.cs" />
+    <Compile Include="BOFactory.cs" />
+    <Compile Include="CarnavalBO.cs" />
+    <Compile Include="CausaBO.cs" />
+    <Compile Include="DAOAccess.cs" />
+    <Compile Include="DiaBO.cs" />
+    <Compile Include="DiagnosticoBO.cs" />
+    <Compile Include="DoencaBO.cs" />
+    <Compile Include="EscalaMedicoBO.cs" />
+    <Compile Include="MedicoBO.cs" />
+    <Compile Include="MunicipioBO.cs" />
+    <Compile Include="OcupacaoBO.cs" />
+    <Compile Include="OrigemBO.cs" />
+    <Compile Include="PacienteBO.cs" />
+    <Compile Include="PostoSaudeBO.cs" />
+    <Compile Include="ProcedenciaBO.cs" />
+    <Compile Include="ProcedimentoBO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RacaBO.cs" />
+    <Compile Include="SexoBO.cs" />
+    <Compile Include="TipoObitoBO.cs" />
+    <Compile Include="UfBO.cs" />
+    <Compile Include="UnidadeBO.cs" />
+    <Compile Include="UsuarioBO.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SOM.DAO\SOM.DAO.csproj">
+      <Project>{a8b371a1-40ef-46c9-b300-cfed7ff5da16}</Project>
+      <Name>SOM.DAO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SOM.Interface\SOM.Interface.csproj">
+      <Project>{474fe1e2-1516-478b-99ea-d0d227d1dd66}</Project>
+      <Name>SOM.Interface</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SOM.OR\SOM.OR.csproj">
+      <Project>{39896e44-2787-4df5-84e4-bae787f6c896}</Project>
+      <Name>SOM.OR</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
