@@ -1,0 +1,28 @@
+<p-table [value]="plantoes" dataKey="Especialidade">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width:30em">Médico</th>
+      <th>Cremeb/UF</th>
+      <th>Início</th>
+      <th>Fim</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex" let-expanded="expanded" let-columns="columns">
+    <tr class="ui-widget-header" *ngIf="rowGroupMetadata[rowData.Especialidade].index === rowIndex">
+      <td colspan="4">
+        <a href="#" [pRowToggler]="rowData">
+          <i [ngClass]="expanded ? 'pi pi-fw pi-chevron-circle-down' : 'pi pi-fw pi-chevron-circle-right'" style="vertical-align: middle;padding-bottom: .1em;"></i>
+          <span>{{rowData.Especialidade}}</span>
+        </a>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-rowData let-rowIndex="rowIndex">
+    <tr>
+      <td>{{rowData.Medico}}</td>
+      <td style="text-align:center;">{{rowData.Cremeb}}/{{rowData.Uf}}</td>
+      <td style="text-align:center;">{{rowData.DataHoraInicio | date:'dd/MM/yyyy HH:mm':'pt-BR'}}</td>
+      <td style="text-align:center;">{{rowData.DataHoraFim | date:'dd/MM/yyyy HH:mm':'pt-BR'}}</td>
+    </tr>
+  </ng-template>39
+</p-table>

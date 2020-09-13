@@ -1,0 +1,32 @@
+<h1>Óbitos Registrados</h1>
+
+<p-table [value]="obitos">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 9em">Data/Hora</th>
+      <th>Detalhe</th>
+      <th>Paciente</th>
+      <th>Tipo</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-obito>
+    <tr>
+      <td>{{obito.Dia.Data | date: 'dd/MM/yy'}} {{obito.Hora}}</td>
+      <td>
+        <u>Unidade</u>: {{obito.Unidade.Nome}}<br />
+        <u>Origem</u>: {{obito.Origem.Descricao}}<br />
+        <u>Causa</u>: {{obito.Causa.Descricao}}
+      </td>
+      <td>{{obito.Paciente.Nome}} ({{obito.Paciente.Idade}} {{obito.Paciente.Idade==1?"ano":"anos"}})</td>
+      <td>
+        {{obito.TipoObito.Descricao}}
+        <br />
+        <u>Observação</u>: {{obito.EspecificarCausaObito}}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p style="color:red;">
+  * Caso a informação não seja real, entre em contato com a unidade de saúde e solicite a correção.
+</p>

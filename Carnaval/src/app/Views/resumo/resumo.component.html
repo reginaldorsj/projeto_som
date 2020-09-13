@@ -1,0 +1,27 @@
+<h1>Resumo</h1>
+<div style="display: flex; vertical-align:central;">
+  <div style="float: right; width: 30%;">
+    <p-card header="Total de Ocorrências" [style]="{'background':'#F0F0F0'}">
+      <span style="font-size:50px;">
+        {{ totalOcorrencias | number:'3.0' }}
+      </span>
+      <p style="text-align:right;">
+        <button (click)="ocorrenciasPorUnidade()" pButton type="button" label="Ver no gráfico" class="ui-button-rounded ui-button-info"></button>
+      </p>
+    </p-card>
+    <br />
+    <br />
+    <p-card header="Total de Plantões" [style]="{'background':'#F0F0F0'}">
+      <span style="font-size:50px;">
+        {{ totalPlantoes | number:'3.0' }}
+      </span>
+      <p style="text-align:right;">
+        <button (click)="plantoesPorUnidade()" pButton type="button" label="Ver no gráfico" class="ui-button-rounded ui-button-info"></button>
+      </p>
+    </p-card>
+  </div>
+  <div style="float: left; width: 70%;">
+    <h2 style="text-align:center">{{titulo}}</h2>
+    <p-chart type="doughnut" [data]="dataDoughnut"></p-chart>
+  </div>
+</div>

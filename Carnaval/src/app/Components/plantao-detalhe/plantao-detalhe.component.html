@@ -1,0 +1,18 @@
+<p-table [value]="quadro">
+  <ng-template pTemplate="header">
+    <tr>
+      <th style="width: 50em">{{descricao | uppercase}}</th>
+      <th style="text-align:center;">Total</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-quadro>
+    <tr *ngIf="quadro.Detalhe!='Total'">
+      <td style="cursor:pointer;">{{quadro.Detalhe}}</td>
+      <td style="text-align:center;">{{quadro.Total}}</td>
+    </tr>
+    <tr *ngIf="quadro.Detalhe=='Total'">
+      <td style="font-weight:bolder;">{{quadro.Detalhe}}</td>
+      <td style="text-align:center;font-weight:bolder;font-size:larger;">{{quadro["Total"]}}</td>
+    </tr>
+  </ng-template>
+</p-table>

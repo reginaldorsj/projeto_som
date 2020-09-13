@@ -1,0 +1,49 @@
+<!-- For non-visual or non-stylesheet-capable user agents -->
+<div id="mainlink"><a href="#main">Skip to main content.</a></div>
+
+
+<!-- ======== Header ======== -->
+
+<div id="header">
+  <div class="left">
+    <p><img src="assets/images/img02.png" style="float:left; margin-top:9px;" />SOM - Carnaval<span class="alt">{{carnaval?.Ano}}</span></p>
+  </div>
+
+  <div class="subheader">
+    <p style="font-weight: bolder; text-align:center;">
+      Sala de Situação
+    </p>
+  </div>
+</div>
+
+
+<!-- ======== Left Sidebar ======== -->
+
+<div id="sidebar">
+  <div>
+    <p class="title">Opções</p>
+    <ul>
+      <li><a routerLink="resumo">Resumo</a></li>
+      <li><a routerLink="ocorrencia">Ocorrências</a></li>
+      <li><a routerLink="plantao">Plantões</a></li>
+      <li><a routerLink="obito/login">Óbitos</a></li>
+    </ul>
+  </div>
+</div>
+
+
+<!-- ======== Main Content ======== -->
+
+<div id="main">
+  <app-content></app-content>
+  <br id="endmain" />
+</div>
+
+
+<!-- ======== Footer ======== -->
+
+<div id="footer">
+  <hr />
+  Copyright &copy; 2005&ndash;{{nowYear}}, Secretaria da Saúde do Estado da Bahia.  Todos os direitos reservados.
+  <br />
+</div>
