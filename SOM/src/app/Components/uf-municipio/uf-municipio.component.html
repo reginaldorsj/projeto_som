@@ -1,0 +1,2 @@
+<p-dropdown  [options]="ufOptions" #uf (onChange)="limpaMunicipioSeUfNull(uf.value)" [(ngModel)]="selectedUf" name="uf" [style]="{'minWidth':'80px'}" class="mydropdown" placeholder="UF" [showClear]="true"></p-dropdown>&nbsp;&nbsp;
+<p-autoComplete forceSelection="true" (onSelect)="enviarMunicipio()" emptyMessage="Nenhum registro encontrado." [disabled]="selectedUf==null" name="municipio" [(ngModel)]="municipio" [suggestions]="resultsMunicipios" field="Descricao" (completeMethod)="loadMunicipioPorNome($event)" [dropdown]="true" [size]="30"></p-autoComplete>

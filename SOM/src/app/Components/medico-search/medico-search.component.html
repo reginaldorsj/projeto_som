@@ -1,0 +1,6 @@
+<p-inputMask [(ngModel)]="cremeb" [disabled]="nomeMedico!=undefined" #cremebMedico name="cremebMedico" mask="?99999999" placeholder="99999999" size="8"></p-inputMask>&nbsp;&nbsp;
+<p-dropdown [(ngModel)]="uf" [disabled]="nomeMedico!=undefined" #ufMedico [style]="{'minWidth':'80px'}" maxlength="2" name="ufMedico" [options]="ufOptions" class="mydropdown" placeholder="UF" [showClear]="true"></p-dropdown>&nbsp;
+<span [hidden]="nomeMedico!=undefined"><i (click)="pesquisarMedico(cremebMedico.value, ufMedico.value)" class="pi pi-search" style="vertical-align:middle; font-size: 1.8em; cursor:pointer;"></i></span>&nbsp;
+<input [(ngModel)]="nomeMedico" type="text" name="nomeMedico" pInputText readonly="readonly" style="background-color:silver;" size="70" />
+<span [hidden]="nomeMedico!=undefined" style="font-size:larger; color:red;">*</span>&nbsp;
+<span [hidden]="nomeMedico==undefined"><i (click)="limpar()" class="pi pi-refresh" style="vertical-align:middle; font-size: 1.8em; cursor:pointer;"></i></span>

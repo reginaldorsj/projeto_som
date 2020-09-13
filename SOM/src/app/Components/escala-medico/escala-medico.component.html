@@ -1,0 +1,79 @@
+<div [hidden]="medico.IdMedico==null">
+  <hr />
+  <h3>Escala</h3>
+  <div [hidden]="view!='listar'">
+    <p-table [value]="escalas" [(selection)]="selectedEscalas" >
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3em">
+          </th>
+          <th>Especialidade</th>
+          <th style="width:10em">Início</th>
+          <th style="width:10em">Fim</th>
+          <th style="width:5em"><strong>Alterar</strong></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-escala>
+        <tr>
+          <td>
+            <p-tableCheckbox [value]="escala"></p-tableCheckbox>
+          </td>
+          <td>{{escala.Ocupacao.Nome}}</td>
+          <td>{{escala.DataHoraInicio | date:'dd/MM/yyyy HH:mm':'pt-BR'}}</td>
+          <td>{{escala.DataHoraFim | date:'dd/MM/yyyy HH:mm':'pt-BR'}}</td>
+          <td style="text-align:center;">
+            <button pButton icon="pi pi-search" (click)="selectEscalaWithButton(escala)"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+    <br />
+    <div style="text-align:center;">
+      <button pButton type="button" label="Incluir" class="ui-button-raised ui-button-rounded" (click)="incluir()"></button>&nbsp;&nbsp;
+      <button [disabled]="selectedEscalas==undefined || selectedEscalas.length==0" pButton type="button" label="Excluir Selecionados" class="ui-button-raised ui-button-rounded" (click)="excluir()"></button>&nbsp;&nbsp;
+    </div>
+  </div>
+  <div [hidden]="view!='editar'">
+    <form #escalaMedicoForm="ngForm" (ngSubmit)="gravar()">
+      <table class="center">
+        <tr>
+          <td>ID:</td>
+          <td>
+            <input #id="ngModel" type="text" name="id" pInputText [(ngModel)]='escalaMedico.IdEscalaMedico' readonly="readonly" style="background-color:silver;" [size]="6" />
+          </td>
+        </tr>
+        <tr>
+          <td>Especialidade:</td>
+          <td>
+            <p-dropdown #especialidade="ngModel" name="especialidade" required [(ngModel)]="escalaMedico.Ocupacao" [style]="{'minWidth':'600px'}" [options]="ocupacaoOptions" class="mydropdown" placeholder="Selecione a especialdiade" [showClear]="true"></p-dropdown>
+            <span [hidden]="!especialidade.invalid" style="font-size:larger; color:red;">*</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Início:</td>
+          <td>
+            <p-dropdown [(ngModel)]='dataInicio' name="dataInicio" [options]="diaOptions" class="mydropdown" #dInicio="ngModel" required [showClear]="true" placeholder="Selecione a data inicial"></p-dropdown>
+            <span [hidden]="dInicio.value!=null" style="font-size:larger; color:red;">*</span>&nbsp;&nbsp;
+            Hora: <p-calendar dataType="string" [style]="{'width':'120px'}" [inputStyle]="{'width':'120px'}" name="horaInicio" [(ngModel)]="horaInicio" #hInicio="ngModel" required [timeOnly]="true" hourFormat="24"></p-calendar>
+            <span [hidden]="!hInicio.invalid" style="font-size:larger; color:red;">*</span>
+          </td>
+        </tr>
+        <tr>
+          <td>Término:</td>
+          <td>
+            <p-dropdown [(ngModel)]='dataTermino' name="dataTermino" [options]="diaOptions" class="mydropdown" #dTermino="ngModel" required [showClear]="true" placeholder="Selecione a data final"></p-dropdown>
+            <span [hidden]="dTermino.value!=null" style="font-size:larger; color:red;">*</span>&nbsp;&nbsp;
+            Hora: <p-calendar dataType="string" [style]="{'width':'120px'}" [inputStyle]="{'width':'120px'}" name="horaTermino" [(ngModel)]="horaTermino" #hTermino="ngModel" required [timeOnly]="true" horurFormat="24"></p-calendar>
+            <span [hidden]="!hTermino.invalid" style="font-size:larger; color:red;">*</span>
+          </td>
+        </tr>
+        <tr>
+          <td colspan="2" align="center">
+            <button [disabled]="escalaMedicoForm.form.invalid" pButton type="button" label="Gravar" class="ui-button-raised ui-button-rounded" (click)="gravar()"></button>&nbsp;&nbsp;
+            <button pButton type="button" label="Desistir" class="ui-button-raised ui-button-rounded" (click)="desistir()"></button>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>

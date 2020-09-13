@@ -1,0 +1,193 @@
+<h1>
+  Lançamento de Ocorrências
+</h1>
+<div style="text-align:center;">
+  <button pButton type="button" label="Incluir Registro" (click)="incluir()" class="ui-button-raised ui-button-rounded"></button>&nbsp;&nbsp;
+  <button pButton type="button" label="Localizar Registro" (click)="localizar()" class="ui-button-raised ui-button-rounded"></button>&nbsp;&nbsp;
+  <button pButton type="button" label="Sair" (click)="sair()" class="ui-button-raised ui-button-rounded"></button>
+</div>
+<br />
+<div [hidden]="view=='localizar'">
+  <form #ocorrencia="ngForm" (ngSubmit)="enviarDados()">
+    <div class="p-grid p-dir-col">
+      <div class="p-col" style="background-color: #f0f0f0;text-align:center;">
+        ID: <input type="text" name="id" pInputText [(ngModel)]='atendimento.IdAtendimento' readonly="readonly" style="background-color:silver;" [size]="10" />&nbsp;&nbsp;&nbsp;
+        Data: <p-dropdown [(ngModel)]='atendimento.Dia' name="data" [options]="diaOptions" class="mydropdown" #data required [showClear]="true" placeholder="Selecione a data"></p-dropdown>
+        <span [hidden]="data.value!=null" style="font-size:larger; color:red;">*</span>&nbsp;&nbsp;&nbsp;
+        Hora: <p-calendar dataType="string" [style]="{'width':'120px'}" [inputStyle]="{'width':'120px'}" name="hora" [(ngModel)]="atendimento.Hora" #hora="ngModel" required [timeOnly]="true" hourFormat="24"></p-calendar>
+        <span [hidden]="!hora.invalid" style="font-size:larger; color:red;">*</span>&nbsp;&nbsp;&nbsp;
+        Prontuário: <p-inputNumber name="prontuario" [(ngModel)]='atendimento.Prontuario' [size]="10" [max]="9999999999" [useGrouping]="false"></p-inputNumber>
+      </div>
+      <div class="p-col">
+        <div class="box, subtitulo">
+          DADOS DO PACIENTE
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="box">
+          Nome: <input type="text" #nome="ngModel" name="nome" pInputText [(ngModel)]='atendimento.Paciente.Nome' [size]="70" [maxLength]="100" required />
+          <span [hidden]="!nome.invalid" style="font-size:larger; color:red;">*</span>&nbsp;&nbsp;
+          Idade/Idade aparente: <p-inputNumber name="idade" [(ngModel)]='atendimento.Paciente.Idade' #idade="ngModel" required [size]="3" [max]="130" [useGrouping]="false"></p-inputNumber>
+          <span [hidden]="!idade.invalid" style="font-size:larger; color:red;">*</span>anos
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="box">
+          Endereço: <input type="text" name="endereco" pInputText [(ngModel)]='atendimento.Paciente.Endereco' [size]="45" [maxLength]="100" />&nbsp;&nbsp;
+          Bairro: <input type="text" name="bairro" pInputText [(ngModel)]='atendimento.Paciente.Bairro' [size]="40" [maxLength]="72" />&nbsp;&nbsp;
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="box">
+          UF/Município: <app-uf-municipio (municipioSelected)="recebeMunicipio($event)" [ufOptions]="ufOptions" [selectedUf]="atendimento.Paciente.Municipio?.Uf" [municipio]="atendimento.Paciente.Municipio"></app-uf-municipio>
+          Sexo: <p-dropdown [(ngModel)]='atendimento.Paciente.Sexo' name="sexo" [options]="sexoOptions" #sexo required class="mydropdown" placeholder="Selecione a sexo" [showClear]="true"></p-dropdown>
+          <span [hidden]="sexo.value!=null" style="font-size:larger; color:red;">*</span>&nbsp;&nbsp;
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="box">
+          Raça/Cor: <p-dropdown name="raca" [(ngModel)]="atendimento.Paciente.Raca" [options]="racaOptions" #raca required class="mydropdown" placeholder="Selecione a raça" [showClear]="true"></p-dropdown>
+          <span [hidden]="raca.value!=null" style="font-size:larger; color:red;">*</span>&nbsp;&nbsp;
+          Telefone: <p-inputMask name="telefone" mask="(99) 99999999?9" [(ngModel)]="atendimento.Paciente.Telefone" placeholder="(99) 999999999"></p-inputMask>&nbsp;&nbsp;
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="box, subtitulo">
+          PROCEDÊNCIA
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="box">
+          <p-dropdown (onChange)="limparPostoSaude()" name="procedencia" [(ngModel)]="atendimento.Procedencia" [options]="procedenciaOptions" #procedencia required class="mydropdown" placeholder="Selecione a procedência" [showClear]="true"></p-dropdown>
+          <span [hidden]="procedencia.value!=null" style="font-size:larger; color:red;">*</span>&nbsp;&nbsp;
+          <p-dropdown #postosaude [style]="{'minWidth':'700px'}" [required]="atendimento.Procedencia!=null && atendimento.Procedencia.IdProcedencia==2" [disabled]="atendimento.Procedencia==null || atendimento.Procedencia.IdProcedencia!=2" name="postosaude" [(ngModel)]="atendimento.PostoSaude" [options]="postoSaudeOptions" class="mydropdown" placeholder="Selecione o posto de saúde" [showClear]="true"></p-dropdown>
+          <span [hidden]="(atendimento.Procedencia!=null && ((atendimento.Procedencia.IdProcedencia==2 && atendimento.PostoSaude!=null) || atendimento.Procedencia.IdProcedencia==1)) ||
+                          (atendimento.Procedencia==null && atendimento.PostoSaude==null)" style="font-size:larger; color:red;">*</span>
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="box, subtitulo">
+          ORIGEM/CIRCUITO
+        </div>
+      </div>
+      <div class="p-col">
+        <span [hidden]="atendimento.Origem!=null" style="color:red;">Selecione uma origem.</span>
+        <div class="p-grid">
+          <div class="p-col-4" *ngFor="let origem of origens">
+            <p-radioButton [(ngModel)]="atendimento.Origem" name="groupOrigem" required [value]="origem" label="{{origem.Descricao}}"></p-radioButton>
+          </div>
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="box, subtitulo">
+          CAUSA
+        </div>
+      </div>
+      <div class="p-col">
+        <span [hidden]="atendimento.Causa!=null" style="color:red;">Selecione uma causa.</span>
+        <div class="p-grid">
+          <div class="p-col-4" *ngFor="let causa of causas">
+            <p-radioButton [(ngModel)]="atendimento.Causa" name="groupCausa" required [value]="causa" label="{{causa.Descricao}}"></p-radioButton>
+          </div>
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="box, subtitulo">
+          DIAGNÓSTICO
+        </div>
+      </div>
+      <div class="p-col">
+        <span [hidden]="selectedDoencas!=null && selectedDoencas.length!=0" style="color:red;">Selecione o(s) diagnóstico(s).</span>
+        <div class="p-grid">
+          <div class="p-col-4" *ngFor="let d of doencas">
+            <p-checkbox name="groupDoencas" [value]="d" label="{{d.Descricao}}" required [(ngModel)]="selectedDoencas"></p-checkbox>
+          </div>
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="box, subtitulo">
+          PROCEDIMENTO REALIZADO
+        </div>
+      </div>
+      <div class="p-col">
+        <span [hidden]="atendimento.Procedimento!=null" style="color:red;">Selecione o procedimento realizado.</span>
+        <div class="p-grid">
+          <div class="p-col-6" *ngFor="let procedimento of procedimentos">
+            <p-radioButton [(ngModel)]="atendimento.Procedimento" name="groupProcedimento" required [value]="procedimento" label="{{procedimento.Descricao}}"></p-radioButton>
+          </div>
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="box, subtitulo">
+          ÓBITO
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="box">
+          <p-dropdown #tipoObito (onChange)="limpaCausaObito(tipoObito.value)" name="tipoObito" [(ngModel)]="atendimento.TipoObito" [options]="tipoObitoOptions" class="mydropdown" placeholder="Não há óbito" [showClear]="true"></p-dropdown>&nbsp;&nbsp;
+          <input type="text" [required]="atendimento.TipoObito!=null && atendimento.TipoObito.IdTipoObito==2" [disabled]="atendimento.TipoObito==null || atendimento.TipoObito.IdTipoObito!=2" name="especificarCausaObito" pInputText [(ngModel)]='atendimento.EspecificarCausaObito' [size]="70" [maxLength]="100" />
+          <span [hidden]="atendimento.TipoObito==null || atendimento.TipoObito.IdTipoObito!=2" style="font-size:larger; color:red;">*</span>
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="box, subtitulo">
+          MÉDICO
+        </div>
+      </div>
+      <div class="p-col">
+        <div class="box">
+          CRM: <app-medico-search [cremeb]="atendimento.Medico?.Cremeb" [uf]="atendimento.Medico?.Uf" [nomeMedico]="atendimento.Medico?.Nome" [ufOptions]="ufOptions" (medico)="recebeMedico($event)"></app-medico-search>
+        </div>
+      </div>
+    </div>
+    <div style="text-align:center;">
+      <button pButton type="button" (click)="novo()" label="Novo" class="ui-button-raised ui-button-rounded"></button>&nbsp;&nbsp;
+      <button pButton type="submit" [disabled]="ocorrencia.form.invalid || atendimento.Medico==null" class="ui-button-raised ui-button-rounded" label="Gravar"></button>
+    </div>
+  </form>
+</div>
+
+<div [hidden]="view=='incluir'">
+  <form #ocorrenciaLocalizar="ngForm" (ngSubmit)="pesquisarPorNome()">
+    <p style="text-align:center;">
+      Informe o nome para localização:
+      <input name="inputNomeLocalizar" #inputNomeLocalizar required id="disabled-input" type="text" size="60" pInputText [(ngModel)]="nomeLocalizar" />
+      <button id="disabled-btn" type="submit" pButton label="Localizar" icon="pi pi-search" [disabled]="ocorrenciaLocalizar.invalid" class="ui-button-raised"></button>
+    </p>
+
+    <p-table [value]="atendimentos" selectionMode="single" [(selection)]="selectedAtendimento">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 3em">
+          </th>
+          <th style="width: 7em">Data/Hora</th>
+          <th>Paciente</th>
+          <th>Origem</th>
+          <th>Causa</th>
+          <th style="width:5em"><strong>Alterar</strong></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-atendimento>
+        <tr>
+          <td>
+            <p-tableRadioButton [value]="atendimento"></p-tableRadioButton>
+          </td>
+          <td>{{atendimento.Dia.Data | date:'dd/MM/yyyy'}} {{atendimento.Hora}}</td>
+          <td>{{atendimento.Paciente.Nome}}</td>
+          <td>{{atendimento.Origem.Descricao}}</td>
+          <td>{{atendimento.Causa.Descricao}}</td>
+          <td style="text-align:center;">
+            <button pButton icon="pi pi-search" (click)="selectAtendimentoWithButton(atendimento)"></button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </form>
+  <br />
+  <div style="text-align:center;">
+    <button pButton type="button" label="Excluir marcado" [disabled]="selectedAtendimento==undefined" (click)="excluir()" class="ui-button-raised ui-button-rounded"></button>
+  </div>
+</div>
+
+<p-confirmDialog header="Confirmação" icon="pi pi-exclamation-triangle"></p-confirmDialog>
+<p-toast position="top-center" key="tc"></p-toast>

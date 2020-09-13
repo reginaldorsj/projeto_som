@@ -1,0 +1,9 @@
+.login-frame {
+  background: #def8fa;
+  border: solid 1px #B5C7DE;
+  margin: 0 auto;
+  vertical-align: central;
+  text-align: center;
+  padding: 10px;
+  width: 70%;
+}

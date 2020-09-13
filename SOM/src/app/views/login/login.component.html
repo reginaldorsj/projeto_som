@@ -1,0 +1,51 @@
+<h2 class="title" style="margin-bottom:5px;">
+  Bem vindo ao SOM
+</h2>
+<p class="meta">
+  <span class="date">
+    {{dataExtenso}}
+  </span>
+</p>
+<div style="clear: both;">
+  &nbsp;
+</div>
+<div class="entry">
+  <form #form="ngForm" (ngSubmit)="entrar()">
+    <div class="login-frame">
+      Usuário: <input type="text" [(ngModel)]="username" id="usuario" name="usuario" #usuario="ngModel" required placeholder="Digite o login" size="15" maxlength="15" />
+      <span [hidden]="usuario.valid || usuario.pristine" style="color:red;">*</span>
+      &nbsp;&nbsp;
+      Senha: <input type="password" [(ngModel)]="password" id="senha" name="senha" #senha="ngModel" required placeholder="Digite a senha" size="15" maxlength="15" />
+      <span [hidden]="senha.valid || senha.pristine" style="color:red;">*</span>
+      &nbsp;
+      <button style="height:28px;" type="submit" [disabled]="form.invalid || viewSpin==true"><span [hidden]="viewSpin==false"><i class="pi pi-spin pi-spinner" style="vertical-align:middle;"></i></span> Entrar</button>
+      <br />
+      <span style="color:red;">{{error}}</span>
+    </div>
+  </form>
+  <br />
+  <p>
+    Este sistema tem por objetivo registrar na rede própria os atendimentos médicos
+    ocorridos no carnaval. Todo cidadão que der entrada em uma unidade de saúde da rede
+    por conta de alguma ocorrência ou acidente ocorrido em qualquer dos circuitos do
+    carnaval de Salvador deverão ser registrados neste sistema.
+  </p>
+  <p>
+    Todos os lançamentos efetuados irão fazer parte de um banco de dados da SESAB afim
+    de que, a cada ano, esses registros sirvam de base para direcionar as ações da rede
+    no sentido de melhorar a qualidade do atendimento prestado a população.
+  </p>
+  <hr />
+  <table id="Table1" cellspacing="1" cellpadding="1" width="100%" border="0">
+    <tr>
+      <td align="left" width="33%">
+        <img src="assets/images/logo-sus.jpg" alt="Logo SUS" />
+      </td>
+      <td align="center" width="33%">
+      </td>
+      <td align="right" width="33%">
+        <img src="assets/images/sesab.jpg" alt="Logo SESAB" />
+      </td>
+    </tr>
+  </table>
+</div>
