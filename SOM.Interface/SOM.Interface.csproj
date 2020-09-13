@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{474FE1E2-1516-478B-99EA-D0D227D1DD66}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>SOM.Interface</RootNamespace>
+    <AssemblyName>SOM.Interface</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="MAP.OR">
+      <HintPath>..\..\Projeto MAP\MAP\bin\MAP.OR.dll</HintPath>
+    </Reference>
+    <Reference Include="Regisoft, Version=4.5.7326.26922, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Regisoft\Regisoft\bin\Regisoft.dll</HintPath>
+    </Reference>
+    <Reference Include="Regisoft.Camadas.Interface">
+      <HintPath>..\..\Regisoft\Regisoft.Camadas.Interface\bin\Regisoft.Camadas.Interface.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BO\IAtendimentoBO.cs" />
+    <Compile Include="BO\IBOFactory.cs" />
+    <Compile Include="BO\ICarnavalBO.cs" />
+    <Compile Include="BO\ICausaBO.cs" />
+    <Compile Include="BO\IDiaBO.cs" />
+    <Compile Include="BO\IDiagnosticoBO.cs" />
+    <Compile Include="BO\IDoencaBO.cs" />
+    <Compile Include="BO\IEscalaMedicoBO.cs" />
+    <Compile Include="BO\IMedicoBO.cs" />
+    <Compile Include="BO\IMunicipioBO.cs" />
+    <Compile Include="BO\IOcupacaoBO.cs" />
+    <Compile Include="BO\IOrigemBO.cs" />
+    <Compile Include="BO\IPacienteBO.cs" />
+    <Compile Include="BO\IPostoSaudeBO.cs" />
+    <Compile Include="BO\IProcedenciaBO.cs" />
+    <Compile Include="BO\IProcedimentoBO.cs" />
+    <Compile Include="BO\IRacaBO.cs" />
+    <Compile Include="BO\ISexoBO.cs" />
+    <Compile Include="BO\ITipoObitoBO.cs" />
+    <Compile Include="BO\IUfBO.cs" />
+    <Compile Include="BO\IUnidadeBO.cs" />
+    <Compile Include="BO\IUsuarioBO.cs" />
+    <Compile Include="DAO\IAtendimentoDAO.cs" />
+    <Compile Include="DAO\ICarnavalDAO.cs" />
+    <Compile Include="DAO\ICausaDAO.cs" />
+    <Compile Include="DAO\IDAOFactory.cs" />
+    <Compile Include="DAO\IDiaDAO.cs" />
+    <Compile Include="DAO\IDiagnosticoDAO.cs" />
+    <Compile Include="DAO\IDoencaDAO.cs" />
+    <Compile Include="DAO\IEscalaMedicoDAO.cs" />
+    <Compile Include="DAO\IMedicoDAO.cs" />
+    <Compile Include="DAO\IMunicipioDAO.cs" />
+    <Compile Include="DAO\IOcupacaoDAO.cs" />
+    <Compile Include="DAO\IOrigemDAO.cs" />
+    <Compile Include="DAO\IPacienteDAO.cs" />
+    <Compile Include="DAO\IPostoSaudeDAO.cs" />
+    <Compile Include="DAO\IProcedenciaDAO.cs" />
+    <Compile Include="DAO\IProcedimentoDAO.cs" />
+    <Compile Include="DAO\IRacaDAO.cs" />
+    <Compile Include="DAO\ISexoDAO.cs" />
+    <Compile Include="DAO\ITipoObitoDAO.cs" />
+    <Compile Include="DAO\IUfDAO.cs" />
+    <Compile Include="DAO\IUnidadeDAO.cs" />
+    <Compile Include="DAO\IUsuarioDAO.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SOM.OR\SOM.OR.csproj">
+      <Project>{39896e44-2787-4df5-84e4-bae787f6c896}</Project>
+      <Name>SOM.OR</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
