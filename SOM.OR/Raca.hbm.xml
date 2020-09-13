@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="SOM.OR" namespace="SOM.OR" default-lazy="false">
+	<class name="SOM.OR.Raca,SOM.OR" table="RACA">
+
+		<id name="IdRaca" column="ID_RACA" type="Int64" unsaved-value="0">
+			<generator class="sequence" >
+				<param name="sequence">GEN_RACA_ID</param>
+			</generator>
+		</id>
+		<property column="DESCRICAO" type="String" name="Descricao" not-null="true" length="50" />
+		
+	</class>
+</hibernate-mapping>

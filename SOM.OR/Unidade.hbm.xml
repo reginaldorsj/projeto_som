@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="SOM.OR" namespace="SOM.OR" default-lazy="false">
+	<class name="SOM.OR.Unidade,SOM.OR" table="UNIDADE">
+
+		<id name="IdUnidade" column="ID_UNIDADE" type="Int64" unsaved-value="0">
+			<generator class="sequence" >
+				<param name="sequence">GEN_UNIDADE_ID</param>
+			</generator>
+		</id>
+		<property column="NOME" type="String" name="Nome" not-null="true" length="100" />
+		<property column="SIGLA" type="String" name="Sigla" length="15" />
+		<property column="COR" type="String" name="Cor" length="6" />
+		<property column="ATIVO" type="Boolean" name="Ativo" not-null="true" />
+		
+	</class>
+</hibernate-mapping>

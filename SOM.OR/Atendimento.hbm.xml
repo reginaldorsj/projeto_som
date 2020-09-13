@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="SOM.OR" namespace="SOM.OR" default-lazy="false">
+	<class name="SOM.OR.Atendimento,SOM.OR" table="ATENDIMENTO">
+
+		<id name="IdAtendimento" column="ID_ATENDIMENTO" type="Int64" unsaved-value="0">
+			<generator class="sequence" >
+				<param name="sequence">GEN_ATENDIMENTO_ID</param>
+			</generator>
+		</id>
+		<many-to-one name="IdDia" column="ID_DIA" class="Dia" not-null="true"  />
+		<many-to-one name="IdUnidade" column="ID_UNIDADE" class="Unidade" not-null="true"  />
+		<many-to-one name="IdProcedencia" column="ID_PROCEDENCIA" class="Procedencia" not-null="true"  />
+		<many-to-one name="IdPostoSaude" column="ID_POSTO_SAUDE" class="PostoSaude" />
+		<many-to-one name="IdOrigem" column="ID_ORIGEM" class="Origem" not-null="true"  />
+		<property column="HORA" type="String" name="Hora" not-null="true" length="5" />
+		<property column="PRONTUARIO" type="String" name="Prontuario" length="10" />
+		<many-to-one name="IdPaciente" column="ID_PACIENTE" class="Paciente" not-null="true"  />
+		<many-to-one name="IdMedico" column="ID_MEDICO" class="Medico" not-null="true"  />
+		<many-to-one name="IdCausa" column="ID_CAUSA" class="Causa" not-null="true"  />
+		<many-to-one name="IdProcedimento" column="ID_PROCEDIMENTO" class="Procedimento" not-null="true"  />
+		<many-to-one name="IdTipoObito" column="ID_TIPO_OBITO" class="TipoObito" />
+		<property column="ESPECIFICAR_CAUSA_OBITO" type="String" name="EspecificarCausaObito" length="100" />
+		<property column="DATA_INCLUSAO" type="DateTime" name="DataInclusao" not-null="true" />
+		<property column="DATA_ULTIMA_ALTERACAO" type="DateTime" name="DataUltimaAlteracao" />
+		<property column="DATA_EXCLUSAO" type="DateTime" name="DataExclusao" />
+		
+	</class>
+</hibernate-mapping>

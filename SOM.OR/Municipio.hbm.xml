@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="SOM.OR" namespace="SOM.OR" default-lazy="false">
+	<class name="SOM.OR.Municipio,SOM.OR" table="MUNICIPIO">
+
+		<id name="IdMunicipio" column="ID_MUNICIPIO" type="Int64" unsaved-value="0">
+			<generator class="sequence" >
+				<param name="sequence">GEN_MUNICIPIO_ID</param>
+			</generator>
+		</id>
+		<many-to-one name="IdUf" column="ID_UF" class="Uf" not-null="true"  />
+		<property column="DESCRICAO" type="String" name="Descricao" not-null="true" length="40" />
+		<property column="CODIGO_IBGE" type="String" name="CodigoIbge" not-null="true" length="20" />
+		
+	</class>
+</hibernate-mapping>

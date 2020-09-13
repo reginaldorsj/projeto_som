@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="SOM.OR" namespace="SOM.OR" default-lazy="false">
+	<class name="SOM.OR.Dia,SOM.OR" table="DIA">
+
+		<id name="IdDia" column="ID_DIA" type="Int64" unsaved-value="0">
+			<generator class="sequence" >
+				<param name="sequence">GEN_DIA_ID</param>
+			</generator>
+		</id>
+		<many-to-one name="IdCarnaval" column="ID_CARNAVAL" class="Carnaval" not-null="true"  />
+		<property column="DATA" type="DateTime" name="Data" not-null="true" />
+		
+	</class>
+</hibernate-mapping>

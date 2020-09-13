@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="SOM.OR" namespace="SOM.OR" default-lazy="false">
+	<class name="SOM.OR.Paciente,SOM.OR" table="PACIENTE">
+
+		<id name="IdPaciente" column="ID_PACIENTE" type="Int64" unsaved-value="0">
+			<generator class="sequence" >
+				<param name="sequence">GEN_PACIENTE_ID</param>
+			</generator>
+		</id>
+		<property column="NOME" type="String" name="Nome" not-null="true" length="100" />
+		<property column="ENDERECO" type="String" name="Endereco" length="100" />
+		<property column="BAIRRO" type="String" name="Bairro" length="72" />
+		<many-to-one name="IdMunicipio" column="ID_MUNICIPIO" class="Municipio" />
+		<many-to-one name="IdRaca" column="ID_RACA" class="Raca" not-null="true"  />
+		<many-to-one name="IdSexo" column="ID_SEXO" class="Sexo" not-null="true"  />
+		<property column="IDADE" type="Int32" name="Idade" not-null="true" />
+		<property column="TELEFONE" type="String" name="Telefone" length="14" />
+		
+	</class>
+</hibernate-mapping>

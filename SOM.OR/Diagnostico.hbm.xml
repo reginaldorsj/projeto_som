@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="SOM.OR" namespace="SOM.OR" default-lazy="false">
+	<class name="SOM.OR.Diagnostico,SOM.OR" table="DIAGNOSTICO">
+
+		<id name="IdDiagnostico" column="ID_DIAGNOSTICO" type="Int64" unsaved-value="0">
+			<generator class="sequence" >
+				<param name="sequence">GEN_DIAGNOSTICO_ID</param>
+			</generator>
+		</id>
+		<many-to-one name="IdAtendimento" column="ID_ATENDIMENTO" class="Atendimento" not-null="true"  />
+		<many-to-one name="IdDoenca" column="ID_DOENCA" class="Doenca" not-null="true"  />
+		
+	</class>
+</hibernate-mapping>

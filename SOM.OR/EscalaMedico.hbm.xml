@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" assembly="SOM.OR" namespace="SOM.OR" default-lazy="false">
+	<class name="SOM.OR.EscalaMedico,SOM.OR" table="ESCALA_MEDICO">
+
+		<id name="IdEscalaMedico" column="ID_ESCALA_MEDICO" type="Int64" unsaved-value="0">
+			<generator class="sequence" >
+				<param name="sequence">GEN_ESCALA_MEDICO_ID</param>
+			</generator>
+		</id>
+		<many-to-one name="IdUnidade" column="ID_UNIDADE" class="Unidade" not-null="true"  />
+		<many-to-one name="IdOcupacao" column="ID_OCUPACAO" class="Ocupacao" not-null="true"  />
+		<many-to-one name="IdMedico" column="ID_MEDICO" class="Medico" not-null="true"  />
+		<property column="DATA_HORA_INICIO" type="DateTime" name="DataHoraInicio" not-null="true" />
+		<property column="DATA_HORA_FIM" type="DateTime" name="DataHoraFim" not-null="true" />
+		
+	</class>
+</hibernate-mapping>
